@@ -1,0 +1,62 @@
+<div class="mapHolder">
+  <form ng-submit="executeSearch(vm.searchString)">
+    <div class="form-group" style="position: absolute;z-index: 9999;right: 15px; top: 15px;width: 300px;">
+      <div class="input-group">
+        <input type="text" ng-model="vm.searchString" class="form-control" id="inputSearchAdress">
+        <span ng-click="executeSearch(vm.searchString)" class="input-group-addon"><i class="fa fa-search"></i></span>
+      </div>
+    </div>
+  </form>
+  <div id="map"></div>
+</div>
+<div class="infobar">
+  <div ng-repeat="layer in vm.smartland.wms track by $index" ng-class="{inactive:!layer.active}" class="layerInfoHolder">
+    <div class="layerInfoHolderHead">
+      <h2>{{layer.displayName}}</h2>
+      <div class="btn-group layerInfoSwitch">
+        <button type="button" ng-class="{visible:layer.loading, hidden:!layer.loading}" ng-model="layer.loading" class="btn btn-default"><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+        <button type="button" ng-class="{visible:layer.active}" ng-model="layer.active" ng-click="layer.active = !layer.active" class="btn btn-default infobarLayerVisibilityCtrl"><i class="fa fa-toggle-on"></i><i class="fa fa-toggle-off"></i></button>
+        <button type="button" ng-class="{hidden:!layer.active}" class="btn btn-default dropdown-toggle sidebarInfoTabControlsTrigger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-cog"></i> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu sidebarInfoTabControls">
+          <li role="presentation" ng-repeat="tab in layer.infobar.tabs" ng-class="{active:tab.active}">
+            <div class="radio sidebarInfoTabControl">
+              <label>
+                <input type="radio" ng-model="layer.infobar.activeTab" value={{$index}}> {{tab.name}}
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div role="tabpanel" ng-repeat="tab in layer.infobar.tabs track by $index" id="it{{layer.shortName}}{{$index}}" ng-class="{active:tab.active}" class="tab-pane">
+        <h4>{{tab.name}}</h4>
+        <div ng-bind-html="vm.renderHtml(tab.text)"></div>
+        <div ng-if="tab.data">
+          <div class="dataRow" ng-repeat="wmsData in layer.featureData">
+            <h5 ng-click="pointOn(layer,wmsData)" id="info{{wmsData.properties.datauid}}"><li class="fa fa-square" style="color:{{wmsData.properties.color}}"></li> {{wmsData.properties.title}} <small>{{wmsData.properties.area}}km<sup>2</sup></small></h5>
+            <i ng-click="removePolygon(layer,wmsData)" class="fa fa-trash"></i>
+          </div>
+        </div>
+        <div ng-if="tab.legend">
+          <ul class="list-unstyled">
+            <li ng-repeat="row in tab.legend">
+              {{$index+1}}. <i class="fa fa-square" aria-hidden="true" style="color:{{row.color}}"></i> {{row.title}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul>
+    <li ng-repeat="link in thirdPartyLinks"><a href="{{link.url}}">{{link.title}}</a></li>
+  </ul>
+  <div ng-if="vm.mapThirdPartyLinks">
+    <h3>Third party links:</h3>
+    <ul>
+      <li ng-repeat="link in vm.mapThirdPartyLinks track by $index"><a href="{{link.url}}" target="_blank">{{link.title}}</a></li>
+    </ul>
+  </div>
+</div>

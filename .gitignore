@@ -3,3 +3,10 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 /node_modules/
+/.brackets.json
+/public/assets/
+/public/assets/js/app.js
+/public/assets/js/common.js
+/public/assets/js/common.min.js
+/public/assets/js/smartland.js
+/public/assets/js/smartland.min.js
