@@ -1,20 +1,18 @@
 /*global L, smartland, console, events, document, setTimeout, navigator, clearTimeout*/
 
-if (!smartland) {
-  var smartland = {};
-}
 smartland.dataLayers = {};
 smartland.mappi = (function () {
+  'use strict';
   var api = {},
-    deteckDoubleClick = 0,
     state = state || {
       mapOptions: {
         maxZoom: 15,
-        minZoom: 5,
+        minZoom: 5
       },
       mapCenter: [48.14455610362899, 17.114295959472656],
       mapZoom: 5
     },
+    deteckDoubleClick = 0,
     _map;
 
   function setMapCenter(position) {
@@ -84,7 +82,8 @@ smartland.mappi = (function () {
     console.log('mapAddDataLayer called:', layer);
     if (layer.type.toLocaleLowerCase() === "wms") {
       smartland.dataLayers[layer.fullLayerName] = L.tileLayer.wms(layer.url, layer.options);
-
+      _map.createPane(layer.shortName);
+      _map.getPane(layer.shortName).style.zIndex = layer.zIndexSvg;
       //do not add already added layers
       var indexOfLayer = smartland.wms.map(function (wmsLayer) {
         return wmsLayer.fullLayerName;
@@ -141,7 +140,11 @@ smartland.mappi = (function () {
           wmsLayerObj.svgLayers.splice(featureDataIndex, 1);
           wmsLayerObj.featureData.splice(featureDataIndex, 1);
         }
-        var s = L.polygon(coordinates, wmsLayerObj.getSvgOptions(featureData));
+
+        var options = wmsLayerObj.getSvgOptions(featureData),
+          s;
+        options.pane = layer.shortName;
+        s = L.polygon(coordinates, options);
         wmsLayerObj.svgLayers.unshift(s);
         wmsLayerObj.featureData.unshift(featureData);
         s.addTo(_map);
@@ -184,7 +187,7 @@ smartland.mappi = (function () {
     render: render,
     getZoom: getMapZoom,
     _map: returnMap,
-    _mapp : _map
+    _mapp: _map
   };
   return api;
 })();

@@ -113,6 +113,7 @@ function smartlandland() {
       "fullLayerName": fullLayerName,
       active: true,
       type: "wms",
+      shortName: "unusedLand",
       "workspace": "smartland",
       "displayName": "Unused Land",
       infobar: {
@@ -146,6 +147,7 @@ function smartlandland() {
       "url": "http://smartland.vps.websupport.sk/geoserver/gwc/service/wms?",
       loading: false,
       "dataCode": dataCode,
+      zIndexSvg: 230,
       svgLayers: [],
       featureData: []
     };

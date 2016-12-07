@@ -148,6 +148,7 @@ function urbanAtlas() {
       "url": "http://smartland.vps.websupport.sk/geoserver/gwc/service/wms?",
       loading: false,
       "dataCode": dataCode,
+      zIndexSvg: 220,
       svgLayers: [],
       featureData: []
     };
