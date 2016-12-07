@@ -107,6 +107,54 @@ function urbanAtlas() {
         title: "Water bodies",
         code: 50000,
         color: "#0095cf"
+  }, {
+        title: "Arable land (annual crops)",
+        code: 21000,
+        color: "#FFFFA8"
+  }, {
+        title: "Permanent crops",
+        code: 22000,
+        color: "#f2a64d"
+  }, {
+        title: "Pastures",
+        code: 23000,
+        color: "#e6e646"
+  }, {
+        title: "Complex and mixed cultivation patterns",
+        code: 24000,
+        color: "#ffe64d"
+  }, {
+        title: "Orchads",
+        code: 25000,
+        color: "#f2cd80"
+  }, {
+        title: "Orchads",
+        code: 25400,
+        color: "#539f79"
+  }, {
+        title: "Forests",
+        code: 30000,
+        color: "#007149"
+  }, {
+        title: "Forests",
+        code: 31000,
+        color: "#008b00"
+  }, {
+        title: "Herbaceous vegetation associations",
+        code: 32000,
+        color: "#cdf24d"
+  }, {
+        title: "Open spaces with little or no vegetations",
+        code: 33000,
+        color: "#cdffcd"
+  }, {
+        title: "Wetlands",
+        code: 40000,
+        color: "#a6a6ff"
+  }, {
+        title: "Water bodies",
+        code: 50000,
+        color: "#0095cf"
   }],
     fullLayerName = "smartland:urban",
     layer = {
@@ -143,7 +191,7 @@ function urbanAtlas() {
         "layers": fullLayerName,
         "transparent": true,
         "zIndex": 11,
-        opacity: 0.5
+        opacity: 1
       },
       "url": "http://smartland.vps.websupport.sk/geoserver/gwc/service/wms?",
       loading: false,
