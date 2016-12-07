@@ -41,8 +41,10 @@ smartland.mappi = (function () {
     L.control.scale({
       imperial: false
     }).addTo(_map);
+    _map.createPane('labels');
     L.tileLayer("https://api.mapbox.com/styles/v1/oksid/ciqu276fx000rccmfkt2y7h68/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib2tzaWQiLCJhIjoiY2lqYWtwN2s3MDAyeHZva3E0OWlsZTZwNyJ9.wMClMXnln0J9ePTZpRuHvQ", {
-        zIndex: 1000
+        zIndex: 1000,
+        pane: 'labels'
       })
       .addTo(_map);
 
