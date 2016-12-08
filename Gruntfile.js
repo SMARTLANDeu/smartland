@@ -9,7 +9,7 @@ module.exports = function (grunt) {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         compress: {
-          drop_console: false
+          drop_console: true
         }
       },
       smartland: {
