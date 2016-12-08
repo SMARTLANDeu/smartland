@@ -191,7 +191,7 @@ function urbanAtlas() {
         "layers": fullLayerName,
         "transparent": true,
         "zIndex": 11,
-        opacity: 1
+        opacity: 0.5
       },
       "url": "http://smartland.vps.websupport.sk/geoserver/gwc/service/wms?",
       loading: false,
