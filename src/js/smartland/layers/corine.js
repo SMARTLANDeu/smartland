@@ -268,6 +268,7 @@ function corine() {
       "url": "http://smartland.vps.websupport.sk/geoserver/gwc/service/wms?",
       loading: false,
       "dataCode": dataCode,
+      zIndexSvg: 210,
       svgLayers: [],
       featureData: []
     };

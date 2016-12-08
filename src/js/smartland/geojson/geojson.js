@@ -28,7 +28,13 @@ function GeoJSONLayer(options, _map) {
     };
 
   layer.addTo(_map);
-  layer.on('click', getUrl);
+  //layer.on('click', getUrl);
+  layer.on('click', function (e) {
+    var url = 'http://mapka.gku.sk/mapovyportal/?basemap=podklad&zoom=' + 12 + '&lng=' + e.latlng.lng + '&lat=' + e.latlng.lat + '#';
+    L.popup().setLatLng(e.latlng)
+      .setContent(L.Util.template('<a href="{url}" target="_blank">{title}</a>',{url:url,title:options.name}))
+      .openOn(_map);
+  });
 
   events.on('mapLoadData', clearAllThirdPartyLinks);
 
